@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Services Section</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+
+        .services-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 40px;
+            text-align: left;
+            max-width: 80%;
+        }
+
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .vacuum-image {
+            width: 40%;
+            height: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .yellow-bg {
+            position: absolute;
+            top: 50px;
+            left: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            z-index: 1;
+            transform: rotate(-15deg);
+        }
+
+        .services-list {
+            width: 60%;
+            padding-left: 40px;
+            z-index: 2;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .service-icon img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .service-content {
+            flex: 1;
+        }
+
+        .service-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .service-desc {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .vacuum-image {
+                width: 80%;
+                margin-bottom: 40px;
+            }
+
+            .services-list {
+                width: 100%;
+                padding-left: 0;
+            }
+
+            .yellow-bg {
+                left: -200px;
+                width: 800px;
+                height: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section class="services-section">
+    <h1 class="title">Meeting Your Needs And Making Your Environment Clean Is Paramount To Us.</h1>
+    <p class="subtitle">We offer various cleaning services ranging from domestic household cleaning to commercial premises cleaning. You get maximum comfort and peace of mind when we do your cleaning for you.</p>
+
+    <div class="content-wrapper">
+        <div class="yellow-bg"></div>
+        <img src="path/to/your/vacuum-image.jpg" alt="Green Vacuum Cleaner" class="vacuum-image">
+
+        <div class="services-list">
+            <div class="service-item">
+                <div class="service-icon">
+                    <!-- Replace with your icon image or use emoji/SVG -->
+                    <img src="path/to/drone-icon.png" alt="Drone Icon">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Drone Cleaning Services</h3>
+                    <p class="service-desc">Our drone cleaning service handles tall glass buildings, solar panels, and rooftops safely and efficiently, giving you spotless results without the stress or risk.</p>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="path/to/construction-icon.png" alt="Construction Icon">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Post Construction Cleaning Services</h3>
+                    <p class="service-desc">Our experts in post construction and post renovation cleaning. Our scope of work includes stain removal, comprehensive floor scrubbing, polishing etc.</p>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="path/to/janitorial-icon.png" alt="Janitorial Icon">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Janitorial | Commercial | Office Cleaning Services</h3>
+                    <p class="service-desc">Our janitorial services include, but are certainly not limited to, office cleaning, restroom cleaning, cafeteria cleaning, specialty cleaning, special guest cleaning etc.</p>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="path/to/carpet-icon.png" alt="Carpet Icon">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Carpet & Upholstery Cleaning Services</h3>
+                    <p class="service-desc">Our carpet cleaning services will help extend the life of your carpets.</p>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="path/to/fumigation-icon.png" alt="Fumigation Icon">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Fumigation Services</h3>
+                    <p class="service-desc">Diamond Shine offers a range of professional fumigation & pest control treatments to keep your environment pest-free. All relevant health, safety and environmental procedures are strictly adhered to.</p>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="path/to/waste-icon.png" alt="Waste Icon">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Waste Management</h3>
+                    <p class="service-desc">We have comprehensive experience and skilled environmental professionals that provide high quality service teamed with a network of nationally recognized disposal facilities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

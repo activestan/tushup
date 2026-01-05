@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbing, Laundry & Industrial Cleaning in Abuja | TushUp</title>
+    <meta name="description" content="TuchUp offers premium haircuts and eco-friendly laundry services in Downtown. Book now via WhatsApp or email for a fresh, stylish experience!">
+    <meta name="keywords" content="TuchUp, tushup, tush, tuch, professional barber, haircut, house cleaning, household, commercial cleaning, industrial cleaning,  haircuts, laundry services, eco-friendly laundry, cut, barbing, haircut booking, Downtown salon, nearby, barbers, barb">
+    <meta name="author" content="Activestan">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="TushUp - Haircuts & Laundry Services">
+    <meta property="og:description" content="Get fresh haircuts, industrial cleaning and eco-friendly laundry services at TushUp. Book via WhatsApp or email today!">
+    <meta property="og:image" content="image/slide1.avif">
+    <meta property="og:url" content="https://tushup.ng/index.html">
+    <meta property="og:type" content="website">
+    <!-- Structured Data (JSON-LD) for Local Business -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "TuchUp",
+        "description": "Premium haircuts and eco-friendly laundry services in Downtown.",
+        "url": "https://tushup.ng/index.html",
+        "telephone": "+2347039306239",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Second Floor, Epicenter, Karumo District, Abuja",
+            "addressLocality": "Abuja",
+            "addressCountry": "NG"
+        },
+        "openingHours": "Mo-Su 08:00-22:00",
+        "sameAs": ["https://wa.me/+2347039306239"]
+    }
+    </script>
+     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Carousel Container */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Adjust height as needed */
+            overflow: hidden;
+        }
+
+        /* Individual Slides */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Text Overlay */
+        .overlay {
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;      
+            z-index: 10;
+        }
+
+        .overlay h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        .overlay p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+       /* .overlay a {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        } */
+        body { font-family: 'Poppins', sans-serif; }
+        .fade-in { animation: fadeIn 1s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .alert { border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+        .alert-success { background-color: #d4edda; color: #155724; }
+        .alert-error { background-color: #f8d7da; color: #721c24; }
+        /* Critical CSS for above-the-fold */
+        .bg-blue-600 { background-color: #2563eb; }
+        .text-white { color: #fff; }
+        .fixed { position: fixed; }
+        .w-full { width: 100%; }
+        .z-50 { z-index: 50; }
+    </style>
+    <style>
+    .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+    }
+
+    .whatsapp-link {
+        position: relative;
+        display: block;
+        width: 60px;
+        height: 60px;
+    }
+
+    .whatsapp-icon {
+        width: 60px;
+        height: 60px;
+        transition: transform 0.3s ease;
+    }
+
+    .whatsapp-link:hover .whatsapp-icon {
+        transform: scale(1.1);
+    }
+
+    .whatsapp-tooltip {
+        position: absolute;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease, bottom 0.3s ease;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .whatsapp-link:hover .whatsapp-tooltip,
+    .whatsapp-link:active .whatsapp-tooltip { /* Shows on tap for mobile */
+        opacity: 1;
+        visibility: visible;
+        bottom: 80px;
+    }
+
+    .tooltip-text {
+        background: #ffd700; /* Yellow background */
+        color: #000;
+        padding: 12px 20px;
+        border-radius: 30px;
+        font-size: 15px;
+        font-weight: 500;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        position: relative;
+    }
+
+    .tooltip-text::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -10px;
+        border: 10px solid transparent;
+        border-top-color: #ffd700;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .whatsapp-float {
+            bottom: 20px;
+            right: 20px;
+        }
+        .whatsapp-icon {
+            width: 55px;
+            height: 55px;
+        }
+    }
+     /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8); 
+            border-radius: 50px; 
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;      /* Ensure it's on top within overlay */
+            z-index: 20;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        
+        .cta-button::after {
+            content: ' →';
+            margin-left: 8px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .cta-button:hover::after {
+            margin-left: 16px;
+        }
+</style>
+</head>
+<body>
+    <!-- Navbar -->
+  <nav class="bg-blue-600 text-white fixed w-full top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        
+        <!-- Logo -->
+        <div class="flex items-center">
+          <a href="#" class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-lg">T</span>
+            </div>
+            <span class="text-xl font-bold text-gray-900">TushUp</span>
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="text-white hover:underline transition font-medium">Home</a>
+          <a href="#services" class="text-white hover:underline transition font-medium">Services</a>
+          <a href="#about" class="text-white hover:underline transition font-medium">About</a>
+          <a href="#contact" class="text-white hover:underline transition font-medium">Contact</a>
+        </div>
+
+
+        <!-- Mobile Hamburger Button -->
+        <div class="md:hidden flex items-center">
+          <button
+            id="menu-btn"
+            class="text-white  focus:outline-none transition"
+            aria-label="Toggle menu"
+          >
+            <!-- Menu Icon -->
+            <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <!-- Close Icon -->
+            <svg id="close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <!-- Mobile Menu -->
+<div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+  <div class="px-4 pt-2 pb-3 space-y-1">
+    <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition font-medium">
+      Home
+    </a>
+
+    <!-- Services with Submenu -->
+    <div class="submenu-parent">
+      <button class="w-full text-left px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition font-medium flex justify-between items-center">
+        Services
+        <svg class="w-5 h-5 transition-transform duration-200" id="services-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+
+      <div class="submenu hidden pl-6 space-y-1">
+        <a href="industruial_cleaning.html" class="block px-3 py-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition">
+          Industrial Cleaning
+        </a>
+        <a href="cuts.html" class="block px-3 py-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition">
+          Expert Haircuts
+        </a>
+        <a href="laundry.html" class="block px-3 py-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition">
+          Laundry & Pickup
+        </a>
+      </div>
+    </div>
+
+    <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition font-medium">
+      About
+    </a>
+    <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition font-medium">
+      Contact
+    </a>
+  </div>
+</div>
+  </nav>
+  <!-- End of Navbar -->
+
+   <!-- Hero Section-->
+    <div class="carousel">
+        <!-- Slide 1: Cleaning -->
+        <div class="slide" style="background-image: url('image/slide1.avif');">
+            <div class="overlay">   
+                <h1>Spotless Spaces, Effortless Living</h1>
+                <p>Professional house and office cleaning tailored to your needs.</p>
+                <a href="industruial_cleaning.html" class="cta-button">Book Cleaning</a>
+            </div>
+        </div>
+
+        <!-- Slide 2: Haircut -->
+        <div class="slide" style="background-image: url('image/slide2.jpg');">
+            <div class="overlay">
+                <h1>Precision Cuts, Timeless Style</h1>
+                <p>Expert barbers for the perfect look, every time.</p>
+                <a href="cuts.html" class="cta-button">Schedule Cut</a>
+            </div>
+        </div>
+
+        <!-- Slide 3: Laundry -->
+        <div class="slide" style="background-image: url('image/slide4.jpeg');">
+            <div class="overlay">
+                <h1>Fresh, Clean, Delivered</h1>
+                <p>Hassle-free pickup, deep cleaning, and laundry services.</p>
+                <a href="laundry.html" class="cta-button">Request Pickup</a>
+            </div>
+        </div>
+    </div>
+    <section id="services" class="py-16 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Services</h2>
+        <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+            Experience convenience and quality with TushUp – your one-stop solution for cleaning, grooming, and laundry.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Service 1: Professional Cleaning -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
+                <img src="image/indus1.jpg" alt="Spotless home interior after professional cleaning" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <svg class="w-12 h-12 mb-4 mx-auto text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h-4m-6 0H5"/></svg>
+                    <h3 class="text-3xl font-semibold mb-3">Professional Cleaning</h3>
+                    <p class="text-lg mb-6">Expert house and office cleaning – deep, eco-friendly, and tailored to your schedule for a sparkling fresh space.</p>
+                    <a href="industruial_cleaning.html" class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-medium transition">Book Now</a>
+                </div>
+            </div>
+
+            <!-- Service 2: Haircut Shop -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
+                <img src="image/cuts2.webp" alt="Professional barber giving stylish haircut" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <svg class="w-12 h-12 mb-4 mx-auto text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <h3 class="text-3xl font-semibold mb-3">Expert Haircuts</h3>
+                    <p class="text-lg mb-6">Precision cuts and grooming by skilled barbers – modern styles that leave you looking sharp and confident.</p>
+                    <a href="cuts.html" class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-medium transition">Schedule Appointment</a>
+                </div>
+            </div>
+
+            <!-- Service 3: Laundry Service -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
+                <img src="image/laundry1.webp" alt="Fresh folded laundry ready for delivery" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <svg class="w-12 h-12 mb-4 mx-auto text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h2l.4-1.6M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    <h3 class="text-3xl font-semibold mb-3">Laundry & Pickup</h3>
+                    <p class="text-lg mb-6">Hassle-free pickup, professional wash, fold, and deep cleaning – delivered fresh to your door.</p>
+                    <a href="laundry.html" class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-medium transition">Request Pickup</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4"></h2>
+        <p class="text-xl text-gray-600 mb-16 max-w-3xl mx-auto">
+            One brand, three premium services – designed to make your life easier, fresher, and more stylish.
+        </p>
+
+        <!-- Service 1: Professional Cleaning (Image Left) -->
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+            <div class="order-2 md:order-1">
+                <img src="image/indus2.jpg" 
+                     alt="Professional cleaning team making a modern home spotless" 
+                     class="rounded-2xl shadow-2xl w-full object-cover hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="order-1 md:order-2 text-left">
+                <h3 class="text-4xl font-bold text-gray-900 mb-6">Professional Cleaning</h3>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Transform your home or office with our expert deep cleaning and maintenance services. Eco-friendly products, flexible scheduling, and attention to every detail for a healthier, sparkling space.
+                </p>
+                <ul class="text-left mb-6 space-y-2">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Eco-Friendly Products</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Deep Cleaning & Disinfection</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Flexible Scheduling</li>
+                </ul>
+                <a href="industruial_cleaning.html" class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition shadow-lg">
+                    Book Cleaning Now
+                </a>
+            </div>
+        </div>
+
+        <!-- Service 2: Expert Haircuts (Image Right) -->
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+            <div class="text-left">
+                <h3 class="text-4xl font-bold text-gray-900 mb-6">Expert Haircuts & Grooming</h3>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Get the perfect look with our skilled barbers. From classic cuts to modern styles, personalized consultations ensure you leave feeling confident and refreshed every time.
+                </p>
+                <ul class="text-left mb-6 space-y-2">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Wash & Style Included</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Kids Cuts</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Walk-Ins Welcome</li>
+                    </ul>
+                <a href="cuts.html" class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition shadow-lg">
+                    Schedule Appointment
+                </a>
+            </div>
+            <div>
+                <img src="image/cuts_9.jpg" 
+                     alt="Professional barber giving a stylish haircut in a modern salon" 
+                     class="rounded-2xl shadow-2xl w-full object-cover hover:scale-105 transition-transform duration-500">
+            </div>
+        </div>
+
+        <!-- Service 3: Laundry & Pickup (Image Left) -->
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <img src="image/laundry2.jpeg.crdownload" 
+                     alt="Fresh folded laundry ready for pickup and delivery" 
+                     class="rounded-2xl shadow-2xl w-full object-cover hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="order-1 md:order-2 text-left">
+                <h3 class="text-4xl font-bold text-gray-900 mb-6">Laundry & Door-to-Door Pickup</h3>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Save time with our hassle-free laundry service. Professional washing, folding, deep cleaning, and convenient pickup/delivery – always fresh and perfectly cared for.
+                </p>
+                <ul class="text-left mb-6 space-y-2">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span>Pickup and Home Delivery</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Same-Day Service</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Stain Removal Guarantee</li>
+                    </ul>
+                <a href="laundry.html" class="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition shadow-lg">
+                    Request Pickup
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+    
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8 fade-in">About TushUp</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-12 fade-in">We're more than just a service—we're your all-in-one solution for effortless living. Founded in 2023, TushUp brings together professional industrial cleaning, expert hair grooming, and convenient laundry & pickup services under one trusted name. Sustainable practices, exceptional quality, and personalized care keep your home, office, and style looking and feeling fresh. Visit our Abuja location or let us come to you!</p>
+            <img src="./image/landing.jpg.jpg" alt="TushUp Team" class="w-full max-w-4xl mx-auto rounded-lg fade-in" loading="lazy">
+        </div>
+    </section>
+    <!-- Reviews Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">What Our Customers Say</h2>
+        <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+            Hear from happy clients who've experienced the TushUp difference in cleaning, grooming, and laundry.
+        </p>
+
+        <!-- Reviews Grid Container -->
+        <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+            <!-- Review Card 1 (Visible) -->
+            <div class="review-card bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300">
+                <div class="flex items-center mb-4">
+                    <img src="image/review1.jpg" alt="Michael O." class="w-16 h-16 rounded-full object-cover mr-4 border-4 border-blue-100">
+                    <div class="text-left">
+                        <h4 class="font-semibold text-lg">Micheal O.</h4>
+                        <div class="flex text-yellow-500 text-lg">★★★★★</div>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                    
+                    "Professional barbers with great vibes. My fade was perfect, and the wash & style made me feel brand new. 10/10!"
+                </p>
+            </div>
+
+            <!-- Review Card 2 (Visible) -->
+            <div class="review-card bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300">
+                <div class="flex items-center mb-4">
+                    <img src="image/review_indus1.webp" alt="Sarah K." class="w-16 h-16 rounded-full object-cover mr-4 border-4 border-blue-100">
+                    <div class="text-left">
+                        <h4 class="font-semibold text-lg">Sarah K.</h4>
+                        <div class="flex text-yellow-500 text-lg">★★★★★</div>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                    "Post-construction cleaning was outstanding. They handled dust and debris perfectly — my new home was move-in ready in one day!"
+                    
+                </p>
+            </div>
+
+            <!-- Review Card 3 (Visible) -->
+            <div class="review-card bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300">
+                <div class="flex items-center mb-4">
+                    <img src="image/review_laundry1.jpg" alt="Aisha M." class="w-16 h-16 rounded-full object-cover mr-4 border-4 border-blue-100">
+                    <div class="text-left">
+                        <h4 class="font-semibold text-lg">Aisha M.</h4>
+                        <div class="flex text-yellow-500 text-lg">★★★★★</div>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                    "Laundry pickup and delivery saved me so much time! Clothes came back perfectly clean and folded. The stain removal on my dress was flawless."
+                </p>
+            </div>
+
+            <!-- Additional Hidden Reviews (More) -->
+            <!-- Review Card 4 -->
+            <div class="review-card hidden bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300">
+                <div class="flex items-center mb-4">
+                    <img src="image/review_laundry2.jpg" alt="David L." class="w-16 h-16 rounded-full object-cover mr-4 border-4 border-blue-100">
+                    <div class="text-left">
+                        <h4 class="font-semibold text-lg">David L.</h4>
+                        <div class="flex text-yellow-500 text-lg">★★★★★</div>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                  "Best haircut I've had in years! The barber listened to exactly what I wanted and delivered a sharp, modern style. Will be back regularly."  
+                </p>
+            </div>
+
+            <!-- Review Card 5 -->
+            <div class="review-card hidden bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300">
+                <div class="flex items-center mb-4">
+                    <img src="image/review4.jpg" alt="Grace N." class="w-16 h-16 rounded-full object-cover mr-4 border-4 border-blue-100">
+                    <div class="text-left">
+                        <h4 class="font-semibold text-lg">Grace N.</h4>
+                        <div class="flex text-yellow-500 text-lg">★★★★☆</div>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                    "Great service overall. The team was punctual and thorough. Only suggestion: faster turnaround for same-day laundry."
+                </p>
+            </div>
+
+            <!-- Review Card 6 -->
+            <div class="review-card hidden bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300">
+                <div class="flex items-center mb-4">
+                    <img src="image/review6.jpg" alt="Nneka C." class="w-16 h-16 rounded-full object-cover mr-4 border-4 border-blue-100">
+                    <div class="text-left">
+                        <h4 class="font-semibold text-lg">Nneka C.</h4>
+                        <div class="flex text-yellow-500 text-lg">★★★★★</div>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed">
+                    "The deep cleaning team transformed my office! Eco-friendly products and incredible attention to detail. Highly recommend TushUp for commercial spaces."
+                </p>
+            </div>
+        </div>
+
+        <!-- More Reviews Button -->
+        <button id="load-more-btn" class="inline-block px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition shadow-lg mb-16">
+            View More Reviews →
+        </button>
+
+        <!-- Add Review Form (Same as before) -->
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl p-10 relative">
+    <h3 class="text-3xl font-bold text-gray-900 mb-6">Share Your Experience</h3>
+    <p class="text-gray-600 mb-8">We'd love to hear from you! Leave a review to help others discover TushUp.</p>
+
+    <!-- Success Message (Hidden by default) -->
+    <div id="review-success" class="hidden text-center py-8">
+        <div class="text-green-600 mb-4">
+            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+        <h4 class="text-2xl font-bold text-gray-900 mb-2">Thank You!</h4>
+        <p class="text-lg text-gray-700">Your review has been submitted successfully. We'll share it soon!</p>
+    </div>
+
+    <!-- Review Form (Visible by default) -->
+    <form id="review-form" class="grid md:grid-cols-2 gap-6">
+        <input type="text" id="review-name" placeholder="Your Name" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+        <input type="email" id="review-email" placeholder="Your Email (optional)" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+
+        <div class="md:col-span-2">
+            <select id="review-rating" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+                <option value="" disabled selected>Rate Your Experience</option>
+                <option value="5">★★★★★ Excellent</option>
+                <option value="4">★★★★☆ Very Good</option>
+                <option value="3">★★★☆☆ Good</option>
+                <option value="2">★★☆☆☆ Fair</option>
+                <option value="1">★☆☆☆☆ Poor</option>
+            </select>
+        </div>
+
+        <div class="md:col-span-2">
+            <textarea id="review-message" placeholder="Write your review..." rows="6" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 resize-none" required></textarea>
+        </div>
+
+        <div class="md:col-span-2 text-center">
+            <button type="submit" class="px-12 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition shadow-lg">
+                Submit Review
+            </button>
+        </div>
+    </form>
+</div>
+</section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in">Get in Touch</h2>
+            <div id="form-message" class="hidden text-center"></div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-semibold mb-4">Visit Us</h3>
+                    <p class="text-gray-600 mb-2">Second Floor, Epicenter, Karumo District, Abuja</p>
+                    <p class="text-gray-600 mb-2">Open Mon-Sun: 8AM-10PM</p>
+                    <p class="text-gray-600 mb-4">Phone: +2347039306239</p>
+                    <a href="mailto:odimegwustanley2004@gmail.com" class="text-blue-600 hover:underline block mb-4">hello@Tushup.com</a>
+                    <a href="https://wa.me/+2347039306239" target="_blank" class="bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition inline-block">Chat on WhatsApp</a>
+                    <a href="https://wa.me/+2347039306239" target="_blank" class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition inline-block">Chat on FaceBook</a>
+                </div>
+                <form id="contactForm" class="space-y-4 fade-in">
+                    <input type="text" name="user_name" placeholder="Your Name" class="w-full p-3 border rounded-lg" required>
+                    <input type="email" name="user_email" placeholder="Your Email" class="w-full p-3 border rounded-lg" required>
+                    <textarea name="message" placeholder="Your Message" rows="4" class="w-full p-3 border rounded-lg" required></textarea>
+                    <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition w-full md:w-auto">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <p>&copy; 2025 TushUp. All rights reserved. </p>
+    </footer>
+    <!-- Floating WhatsApp Chat Button -->
+<div class="whatsapp-float">
+    <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-link">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="whatsapp-icon">
+        <span class="whatsapp-tooltip">
+            <span class="tooltip-text">Need Help? Chat with us</span>
+        </span>
+    </a>
+</div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Initialize first slide
+        slides[0].classList.add('active');
+
+        // Auto-slide every 5 seconds
+        setInterval(showNextSlide, 10000);
+
+
+        //buger menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      let isOpen = false;
+
+      menuBtn.addEventListener('click', () => {
+        isOpen = !isOpen;
+
+        // Toggle mobile menu visibility
+        if (isOpen) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.classList.add('block');
+          closeIcon.classList.remove('hidden');
+          menuIcon.classList.add('hidden');
+        } else {
+          mobileMenu.classList.remove('block');
+          mobileMenu.classList.add('hidden');
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        }
+      });
+
+      // Close menu when clicking a link (mobile)
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          isOpen = false;
+          mobileMenu.classList.remove('block');
+          mobileMenu.classList.add('hidden');
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        });
+      });
+    });
+
+    // Load More Reviews Functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const hiddenReviews = document.querySelectorAll('.review-card.hidden');
+
+        loadMoreBtn.addEventListener('click', function () {
+            hiddenReviews.forEach((review, index) => {
+                // Staggered reveal for smooth effect
+                setTimeout(() => {
+                    review.classList.remove('hidden');
+                    review.style.opacity = '0';
+                    review.style.transform = 'translateY(20px)';
+                    // Trigger reflow
+                    review.offsetHeight;
+                    review.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    review.style.opacity = '1';
+                    review.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+
+            // Hide button after all reviews are shown
+            loadMoreBtn.style.display = 'none';
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const reviewForm = document.getElementById('review-form');
+        const successMessage = document.getElementById('review-success');
+
+        reviewForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent actual form submission (for demo)
+
+            // Optional: Basic validation
+            const name = document.getElementById('review-name').value.trim();
+            const message = document.getElementById('review-message').value.trim();
+            const rating = document.getElementById('review-rating').value;
+
+            if (name && message && rating) {
+                // Hide form and show success message
+                reviewForm.style.display = 'none';
+                successMessage.classList.remove('hidden');
+
+                // Optional: Reset form after a delay (for real use, you'd send data first)
+                setTimeout(() => {
+                    reviewForm.reset();
+                }, 1000);
+            }
+        });
+    });
+
+    // Add submenu toggle for mobile
+document.querySelectorAll('.submenu-parent').forEach(parent => {
+  const button = parent.querySelector('button');
+  const submenu = parent.querySelector('.submenu');
+  const chevron = parent.querySelector('#services-chevron');
+
+  button.addEventListener('click', () => {
+    submenu.classList.toggle('hidden');
+    chevron.classList.toggle('rotate-180');
+  });
+});
+    </script>
+</body>
+</html>
